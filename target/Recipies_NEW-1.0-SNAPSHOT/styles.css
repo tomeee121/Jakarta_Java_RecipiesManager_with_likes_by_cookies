@@ -1,0 +1,43 @@
+body>*:not(.without){
+    border: 1px solid black;
+    max-width: 600px;
+    margin: 5px auto;
+}
+body{text-align: center;
+    font-weight: bold;
+}
+
+.categories > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.categories > ul > li {
+    flex-grow: 1;
+    padding: 0.5rem;
+    font-weight: 500;
+    border: 2px solid;
+    color: white;
+    opacity: 0.8;
+}
+
+/* po najechaniu na kafelek usuwamy przezroczystość */
+.categories > ul > li:hover {
+    opacity: 1;
+}
+
+/* wyśrodkowanie tekstu na kafelkach i zmiana koloru linków */
+.categories > ul > li > a {
+    color: inherit;
+    display: block;
+    text-align: center;
+}
+
+/* kolor kafelków */
+.categories > ul > li {
+    background-color: #5856D6;
+}
+
