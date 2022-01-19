@@ -29,16 +29,18 @@ public class voteService {
     }
 
 
-    public Integer getCounter(List<Recipe> recipies){
+    public List<Integer> getCounter(List<Recipe> recipies){
 
+        List<Integer> votesSums = new ArrayList<>();
         RecipeDAO ref = new RecipeDAO();
         Integer counter = 0;
 
         for(Recipe one : recipies){
             Integer id = one.getId();
             counter = ref.countVotes(id);
+            votesSums.add(counter);
         }
-        return counter;
+        return votesSums;
     }
 
     public List<Recipe> getRecipiesWithCounter(List<Recipe> recipies, Integer counter){

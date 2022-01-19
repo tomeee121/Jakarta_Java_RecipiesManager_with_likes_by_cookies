@@ -217,4 +217,41 @@ public class RecipeDAO {
         }
     }
 
+    public boolean checkForLog(String ip, String userAgent, Integer recipeId) {
+        boolean ifLogExists = false;
+        final String querry = """
+        SELECT id FROM log WHERE ip =(?) AND userAgent=(?) AND recipeId =(?)""";
+        try (   Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection.prepareStatement(querry)) {
+            statement.setString(1,ip);
+            statement.setString(2,userAgent);
+            statement.setInt(3,recipeId);
+            ResultSet set = statement.executeQuery();
+            while(set.next()){
+                ifLogExists = true;
+            }
+            return ifLogExists;
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void saveLog(String ip, String userAgent, Integer recipeId) {
+        final String querry = """
+                INSERT INTO
+                    log (ip, userAgent, recipeId)
+                VALUES
+                    (?, ?, ?)
+                """;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(querry)) {
+            statement.setString(1, ip);
+            statement.setString(2, userAgent);
+            statement.setInt(3,recipeId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
